@@ -1,6 +1,6 @@
 # Description:
-#   List ec2 instances info
-#   Show detail about an instance if specified an instance id
+#   List elasticbeanstalk application info
+#   Show detail about an application if specified an application name
 #   Filter ec2 instances info if specified an instance name
 #
 # Commands:
@@ -28,7 +28,7 @@ getArgParams = (arg) ->
   }
 
 module.exports = (robot) ->
-  robot.respond /ec2 ls(.*)$/i, (msg) ->
+  robot.respond /elasticbeanstalk ls(.*)$/i, (msg) ->
     arg_params = getArgParams(msg.match[1])
     ins_id  = arg_params.ins_id
     ins_filter = arg_params.ins_filter
@@ -70,15 +70,15 @@ module.exports = (robot) ->
               type   : ins.InstanceType
               id     : ins.InstanceId
               time   : moment(ins.LaunchTime).fromNow()
-              # time   : moment(ins.LaunchTime).format('YYYY-MM-DD HH:mm:ssZ')
-              # state  : ins.State.Name
-              # image  : ins.ImageId
-              # az     : ins.Placement.AvailabilityZone
-              # subnet : ins.SubnetId
+# time   : moment(ins.LaunchTime).format('YYYY-MM-DD HH:mm:ssZ')
+# state  : ins.State.Name
+# image  : ins.ImageId
+# az     : ins.Placement.AvailabilityZone
+# subnet : ins.SubnetId
             })
 
           messages.sort (a, b) ->
-            # moment(a.time) - moment(b.time)
+# moment(a.time) - moment(b.time)
             if a.name > b.name
               return 1
             else if a.name < b.name
